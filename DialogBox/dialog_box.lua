@@ -162,7 +162,7 @@ af[#af+1] = Def.ActorFrame{
   -- BMT for the speaker's name
   LoadFont("Common Normal")..{
     Text=g.Dialog.Speaker[g.Dialog.Index],
-    InitCommand=function(self) self:zoom(1.1) end,
+    InitCommand=function(self) self:zoom(1) end,
     ShowCommand=function(self)
       if g.Dialog.Speakers[g.Dialog.Index] then
         if g.Dialog.HideNames then
@@ -194,7 +194,7 @@ for k,character in pairs(characters) do
       self:cropright(1):zoom(character.font_zoom or characters.defaults.font_zoom)
     end,
     OnCommand=function(self)
-      self:align(0,0):xy(-200, -30)
+      self:align(0,0):xy(-200, -34)
         :diffuse(color(character.font_color or characters.defaults.font_color))
         :wrapwidthpixels(480/self:GetZoom())
     end,
@@ -217,7 +217,6 @@ for k,character in pairs(characters) do
       if g.Dialog.Words[g.Dialog.Index] then
         self:settext( g.Dialog.Words[g.Dialog.Index] )
           :linear(0.75):cropright(0):queuecommand("FinishUpdateText")
-          DiffuseEmojis(self)
       else
         self:queuecommand("ClearText")
       end

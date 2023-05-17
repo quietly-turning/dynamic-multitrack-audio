@@ -35,18 +35,26 @@ local npc = {
     Right=function() return  pos.y    * map_data.width + (pos.x+2) end,
   },
 }
+
+local OppositeDir = {
+  Left="Right",
+  Right="Left",
+  Up="Down",
+  Down="Up"
+}
+
 local frames = {
   Down = {
-    { Frame=0,  Delay=SleepDuration/1.5}
+    { Frame=0,  Delay=SleepDuration}
   },
   Left = {
-    { Frame=1,  Delay=SleepDuration/1.5}
+    { Frame=1,  Delay=SleepDuration}
   },
   Right = {
-    { Frame=2,  Delay=SleepDuration/1.5}
+    { Frame=2,  Delay=SleepDuration}
   },
   Up = {
-    { Frame=3,  Delay=SleepDuration/1.5}
+    { Frame=3,  Delay=SleepDuration}
   }
 }
 
@@ -56,6 +64,7 @@ local WillBeOffMap = {
   Left=function()  return pos.x < 1                 end,
   Right=function() return pos.x > map_data.width-2  end,
 }
+
 local UpdatePosition = function()
   -- Increment/Decrement the value as needed first
   if g.NPCs[map_index][npc.name].dir == "Up" then
@@ -103,11 +112,7 @@ return Def.Sprite{
     end
   end,
   TurnToFacePlayerCommand=function(self)
-    if g.Player[g.CurrentMap].dir == "Left" then npc.dir = "Right"
-    elseif g.Player[g.CurrentMap].dir == "Right" then npc.dir = "Left"
-    elseif g.Player[g.CurrentMap].dir == "Down" then npc.dir = "Up"
-    elseif g.Player[g.CurrentMap].dir == "Up" then npc.dir = "Down"
-    end
+    npc.dir = OppositeDir[ g.Player[g.CurrentMap].dir ]
     self:queuecommand("UpdateSpriteFrames")
   end,
   TurnRightCommand=function(self)

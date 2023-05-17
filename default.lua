@@ -31,6 +31,91 @@ g.TimeAtStart = GetTimeSinceStart()
 g.RunTime = function() return GetTimeSinceStart() - g.TimeAtStart end
 
 -- ----------------------------------------------------------------------------
+-- helper functions
+
+-- iterates over a numerically-indexed table (haystack) until a desired value (needle) is found
+-- if found, return the index (number) of the desired value within the table
+-- if not found, return nil
+g.FindInTable = function(needle, haystack)
+	for i = 1, #haystack do
+		if needle == haystack[i] then
+			return i
+		end
+	end
+	return nil
+end
+
+-- TableToString() function via:
+-- http://www.hpelbers.org/lua/print_r
+-- Copyright 2009: hans@hpelbers.org
+local TableToString = function(t, name, indent)
+	local tableList = {}
+	local table_r
+
+	table_r = function(t, name, indent, full)
+		local id = not full and name or type(name)~="number" and tostring(name) or '['..name..']'
+		local tag = indent .. id .. ' = '
+		local out = {}	-- result
+
+		if type(t) == "table" then
+			if tableList[t] ~= nil then
+				table.insert(out, tag .. '{} -- ' .. tableList[t] .. ' (self reference)')
+			else
+				tableList[t]= full and (full .. '.' .. id) or id
+				if next(t) then -- Table not empty
+					table.insert(out, tag .. '{')
+					for key,value in pairs(t) do
+						table.insert(out,table_r(value,key,indent .. '|    ',tableList[t]))
+					end
+					table.insert(out,indent .. '}')
+				else
+					table.insert(out,tag .. '{}')
+				end
+			end
+		else
+			local val = type(t)~="number" and type(t)~="boolean" and '"'..tostring(t)..'"' or tostring(t)
+			table.insert(out, tag .. val)
+		end
+
+		return table.concat(out, '\n')
+	end
+
+	return table_r(t,name or 'Value',indent or '')
+end
+
+g.SM = function( arg, duration )
+	local msg
+
+	-- if a table has been passed in, recursively stringify the table's keys and values
+	if type( arg ) == "table" then
+		msg = TableToString(arg)
+	-- otherwise, Lua's standard tostring() should suffice
+	else
+		msg = tostring(arg)
+	end
+
+	MESSAGEMAN:Broadcast("SystemMessage", {Message=msg, Duration=duration})
+	Trace(msg)
+end
+
+local OnlyShowFG = function()
+  local screen = SCREENMAN:GetTopScreen()
+  if not screen then
+     lua.ReportScriptError("OnlyShowFG() failed to run because there is no Screen yet.")
+     return nil
+  end
+
+  local layers = screen:GetChildren()
+
+  for name,layer in pairs(layers) do
+     if name ~= "SongForeground" then
+        layer:visible(false)
+     end
+  end
+end
+
+
+-- ----------------------------------------------------------------------------
 
 local map_data = {}
 for i,map in ipairs(g.maps) do map_data[i] = LoadActor("./map_data/" .. map .. ".lua") end
@@ -46,12 +131,7 @@ local normal_audio_af = LoadActor("./audio/normal-audio.lua", g)
 
 local af = Def.ActorFrame{}
 af.OnCommand=function(self)
-  local screen = SCREENMAN:GetTopScreen()
-  for name,layer in pairs(screen:GetChildren()) do
-    if  name ~= "SongForeground" then
-      layer:sleep(1):visible(false)
-    end
-  end
+  OnlyShowFG()
 
   SCREENMAN:set_input_redirected(PLAYER_1, true)
   SCREENMAN:set_input_redirected(PLAYER_2, true)
@@ -81,36 +161,36 @@ af[#af+1] = Def.Quad{
     self:smooth(1):diffusealpha(0)
   end,
   FadeToBlackCommand=function(self)
-		g.InputIsLocked = true
-		self:smooth(0.5):diffusealpha(1):queuecommand("ChangeMap")
-	end,
-	FadeToClearCommand=function(self)
-		g.InputIsLocked = false
-		self:smooth(0.5):diffusealpha(0)
-	end,
-	ChangeMapCommand=function(self)
-		local facing = g.Player[g.CurrentMap].dir
-		local visuals_af = self:GetParent():GetChild("VisualsActorFrame")
+    g.InputIsLocked = true
+    self:smooth(0.5):diffusealpha(1):queuecommand("ChangeMap")
+  end,
+  FadeToClearCommand=function(self)
+    g.InputIsLocked = false
+    self:smooth(0.5):diffusealpha(0)
+  end,
+  ChangeMapCommand=function(self)
+    local facing = g.Player[g.CurrentMap].dir
+    local visuals_af = self:GetParent():GetChild("VisualsActorFrame")
 
-		-- don't draw the old map
-		visuals_af:GetChild("Map"..g.CurrentMap):visible(false)
+    -- don't draw the old map
+    visuals_af:GetChild("Map"..g.CurrentMap):visible(false)
 
-		-- update CurrentMap index
-		g.CurrentMap = g.next_map.index
-		-- maintain the direction the player was last facing when transferring maps
-		g.Player[g.CurrentMap].dir = facing
+    -- update CurrentMap index
+    g.CurrentMap = g.next_map.index
+    -- maintain the direction the player was last facing when transferring maps
+    g.Player[g.CurrentMap].dir = facing
 
-		-- call InitCommand on the player Sprite for this map, passing in starting position data specified in Tiled
-		g.Player[g.CurrentMap].actor:playcommand("Init", {x=g.next_map.x, y=g.next_map.y} )
+    -- call InitCommand on the player Sprite for this map, passing in starting position data specified in Tiled
+    g.Player[g.CurrentMap].actor:playcommand("Init", {x=g.next_map.x, y=g.next_map.y} )
 
-		-- reset this (just in case?)
-		g.next_map = nil
+    -- reset this (just in case?)
+    g.next_map = nil
 
-		-- start drawing the new map and update its position if needed
-		visuals_af:GetChild("Map"..g.CurrentMap):visible(true):playcommand("MoveMap")
+    -- start drawing the new map and update its position if needed
+    visuals_af:GetChild("Map"..g.CurrentMap):visible(true):playcommand("MoveMap")
 
-		self:queuecommand("FadeToClear")
-	end
+    self:queuecommand("FadeToClear")
+  end
 }
 
 return af
