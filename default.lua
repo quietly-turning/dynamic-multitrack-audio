@@ -5,11 +5,10 @@
 -- passing around our many files
 local g = {}
 
+-- filenames that correspond to lua exported from Tiled
 g.maps = { "audio-experiment" }
 g.CurrentMap = 1
 g.collision_layer = {}
-
-g.TimeAtStart = GetTimeSinceStart()
 
 g.InputIsLocked = false
 g.SleepDuration = 0.2
@@ -22,11 +21,13 @@ g.Dialog = {
   Speaker = "nellie"
 }
 
+g.NPCs = {}
 g.SeenEvents = {}
 g.Events = {}
 g.Player = {}
 g.DynamicAudio = {}
 
+g.TimeAtStart = GetTimeSinceStart()
 g.RunTime = function() return GetTimeSinceStart() - g.TimeAtStart end
 
 -- ----------------------------------------------------------------------------
@@ -36,7 +37,7 @@ for i,map in ipairs(g.maps) do map_data[i] = LoadActor("./map_data/" .. map .. "
 
 -- map_af needs to be loaded prior to audio_af
 -- so that we can position Def.Sound actors appropriately on the map
-local map_af     = LoadActor("./MapActorFrame.lua", {g, map_data})
+local visuals_af = LoadActor("./VisualsActorFrame.lua", {g, map_data})
 local audio_af   = LoadActor("./audio/dynamic-audio.lua", g)
 local dialog_box = LoadActor("./DialogBox/dialog_box.lua", {g})
 local normal_audio_af = LoadActor("./audio/normal-audio.lua", g)
@@ -66,7 +67,7 @@ end
 af[#af+1] = Def.Actor{ InitCommand=function(self) self:sleep(999) end }
 
 -- ----------------------------------------------------------------------------
-af[#af+1] = map_af
+af[#af+1] = visuals_af
 af[#af+1] = dialog_box
 af[#af+1] = audio_af
 af[#af+1] = normal_audio_af
@@ -79,6 +80,37 @@ af[#af+1] = Def.Quad{
   InitialRevealCommand=function(self)
     self:smooth(1):diffusealpha(0)
   end,
+  FadeToBlackCommand=function(self)
+		g.InputIsLocked = true
+		self:smooth(0.5):diffusealpha(1):queuecommand("ChangeMap")
+	end,
+	FadeToClearCommand=function(self)
+		g.InputIsLocked = false
+		self:smooth(0.5):diffusealpha(0)
+	end,
+	ChangeMapCommand=function(self)
+		local facing = g.Player[g.CurrentMap].dir
+		local visuals_af = self:GetParent():GetChild("VisualsActorFrame")
+
+		-- don't draw the old map
+		visuals_af:GetChild("Map"..g.CurrentMap):visible(false)
+
+		-- update CurrentMap index
+		g.CurrentMap = g.next_map.index
+		-- maintain the direction the player was last facing when transferring maps
+		g.Player[g.CurrentMap].dir = facing
+
+		-- call InitCommand on the player Sprite for this map, passing in starting position data specified in Tiled
+		g.Player[g.CurrentMap].actor:playcommand("Init", {x=g.next_map.x, y=g.next_map.y} )
+
+		-- reset this (just in case?)
+		g.next_map = nil
+
+		-- start drawing the new map and update its position if needed
+		visuals_af:GetChild("Map"..g.CurrentMap):visible(true):playcommand("MoveMap")
+
+		self:queuecommand("FadeToClear")
+	end
 }
 
 return af

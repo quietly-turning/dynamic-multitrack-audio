@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="21">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="26">
  <editorsettings>
   <export target="audio-experiment.lua" format="lua"/>
  </editorsettings>
@@ -9,8 +9,9 @@
  <tileset firstgid="257" name="collision" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="tilesets/png/collision.png" width="32" height="32"/>
  </tileset>
- <layer id="10" name="ground" width="30" height="15">
-  <data encoding="csv">
+ <group id="14" name="Under">
+  <layer id="10" name="ground" width="30" height="15">
+   <data encoding="csv">
 5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6,
 21,22,21,22,21,22,21,11,21,22,21,22,21,22,21,11,21,22,21,22,21,22,21,22,21,22,21,22,21,22,
 37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38,
@@ -27,9 +28,9 @@
 21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,
 37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38,37,38
 </data>
- </layer>
- <layer id="1" name="under" width="30" height="15">
-  <data encoding="csv">
+  </layer>
+  <layer id="1" name="under" width="30" height="15">
+   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,171,0,0,141,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -46,9 +47,9 @@
 0,0,0,0,0,0,0,0,141,0,0,0,0,0,0,0,0,0,0,0,137,138,139,140,141,142,143,144,123,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,139,0,0,0,0,0,0,0,139,0
 </data>
- </layer>
- <layer id="3" name="pianos under" width="30" height="15">
-  <data encoding="csv">
+  </layer>
+  <layer id="3" name="pianos under" width="30" height="15">
+   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 193,194,195,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,193,194,195,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,126,0,0,0,0,0,0,0,0,
@@ -65,47 +66,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,126,0,0,0,0,0,0,0,0,0,0,0,0,125,0,0,0,0,0,0,0,125
 </data>
- </layer>
- <objectgroup id="4" name="Interactive Events">
-  <object id="10" name="high" x="864" y="32" width="32" height="32">
-   <properties>
-    <property name="img" value="normal"/>
-    <property name="text" value="The lows tones are now a distant memory, another time.  The high tones of this piano fill you with anticipation."/>
-   </properties>
-  </object>
-  <object id="14" name="high" x="832" y="32" width="32" height="32">
-   <properties>
-    <property name="img" value="normal"/>
-    <property name="text" value="The lows tones are now a distant memory, another time.  The high tones of this piano fill you with anticipation."/>
-   </properties>
-  </object>
-  <object id="15" name="mid" x="480" y="352" width="32" height="32">
-   <properties>
-    <property name="img" value="normal"/>
-    <property name="text" value="The lows are more distant now,  and the middle tones are most prominent."/>
-   </properties>
-  </object>
-  <object id="8" name="mid" x="512" y="352" width="32" height="32">
-   <properties>
-    <property name="img" value="normal"/>
-    <property name="text" value="The lows are more distant now,  and the middle tones are most prominent."/>
-   </properties>
-  </object>
-  <object id="18" name="low" x="0" y="32" width="32" height="32">
-   <properties>
-    <property name="img" value="normal"/>
-    <property name="text">The lower tones of this piano resonate clearly here.
-Your journey stretches out before you.   There is a long road ahead.</property>
-   </properties>
-  </object>
-  <object id="4" name="low" x="32" y="32" width="32" height="32">
-   <properties>
-    <property name="img" value="normal"/>
-    <property name="text">The lower tones of this piano resonate clearly here.
-Your journey stretches out before you.   There is a long road ahead.</property>
-   </properties>
-  </object>
- </objectgroup>
+  </layer>
+ </group>
  <objectgroup id="7" name="Dynamic Audio">
   <object id="11" name="low audio" x="0" y="32" width="32" height="32">
    <properties>
@@ -123,11 +85,20 @@ Your journey stretches out before you.   There is a long road ahead.</property>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="2" name="Player">
+ <objectgroup id="16" name="NPC">
+  <object id="21" name="quietly" x="128" y="96" width="32" height="32">
+   <properties>
+    <property name="dir" value="Down"/>
+    <property name="zoom" type="float" value="0.666"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="2" name="PlayerLayer">
   <object id="3" name="Player" x="32" y="96" width="32" height="32"/>
  </objectgroup>
- <layer id="8" name="Over" width="30" height="15">
-  <data encoding="csv">
+ <group id="15" name="Over">
+  <layer id="8" name="Over" width="30" height="15">
+   <data encoding="csv">
 177,178,179,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,177,178,179,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,110,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -144,26 +115,8 @@ Your journey stretches out before you.   There is a long road ahead.</property>
 0,0,0,0,0,0,0,0,110,0,0,0,0,0,0,0,0,0,0,0,0,109,0,0,0,0,0,0,0,109,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
- </layer>
- <layer id="6" name="Collision" width="30" height="15" opacity="0.48">
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-257,257,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,257,257,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,257,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,257,0,0,0,0,0,0,0,0,0,0,0,0,257,257,257,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,257,0,0,0,0,0,0,0,0,0,0,0,0,257,0,0,0,0,0,0,0,257
-</data>
- </layer>
+  </layer>
+ </group>
  <objectgroup id="5" name="Texture">
   <object id="7" name="Fog" x="0" y="0" width="960" height="480">
    <properties>
@@ -181,6 +134,54 @@ Your journey stretches out before you.   There is a long road ahead.</property>
     <property name="alpha" type="float" value="0.25"/>
     <property name="vx" type="float" value="-0.0125"/>
     <property name="vy" type="float" value="0.01"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer id="6" name="Collision" width="30" height="15" opacity="0.48">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+257,257,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,257,257,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,257,0,0,0,0,0,0,0,0,
+0,0,0,0,257,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,257,0,0,0,0,0,0,0,0,0,0,0,0,257,257,257,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,257,0,0,0,0,0,0,0,0,0,0,0,0,257,0,0,0,0,0,0,0,257
+</data>
+ </layer>
+ <objectgroup id="4" name="Events">
+  <object id="14" name="high" x="832" y="32" width="64" height="32">
+   <properties>
+    <property name="speaker1" value="nellie"/>
+    <property name="text" value="The lows tones are now a distant memory, another time.  The high tones of this piano fill you with anticipation."/>
+   </properties>
+  </object>
+  <object id="15" name="mid" x="480" y="352" width="64" height="32">
+   <properties>
+    <property name="speaker1" value="nellie"/>
+    <property name="text" value="The lows are more distant now,  and the middle tones are most prominent."/>
+   </properties>
+  </object>
+  <object id="18" name="low" x="0" y="32" width="64" height="32">
+   <properties>
+    <property name="speaker1" value="nellie"/>
+    <property name="text">The lower tones of this piano resonate clearly here.
+Your journey stretches out before you.   There is a long road ahead.</property>
+   </properties>
+  </object>
+  <object id="22" name="talk with quietly-turning" x="128" y="96" width="32" height="32">
+   <properties>
+    <property name="speaker1" value="quietly"/>
+    <property name="text" value="Welcome to my &quot;dynamic audio&quot; proof-of-concept demo for StepMania!"/>
+    <property name="text2" value="You can test it out by visitng the different pianos throughout this room."/>
+    <property name="text3" value="Each piano is playing a unique .ogg file!  As you approach one piano, you'll hear its audio become louder, and the other two pianos' audio will be more quiet."/>
    </properties>
   </object>
  </objectgroup>
