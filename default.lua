@@ -19,7 +19,7 @@ g.map = {
   zoom = 2
 }
 g.Dialog = {
-  Speaker = ""
+  Speaker = "nellie"
 }
 
 g.SeenEvents = {}

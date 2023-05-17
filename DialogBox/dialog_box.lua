@@ -2,7 +2,8 @@ local args = ...
 local g = args[1]
 local song_dir = GAMESTATE:GetCurrentSong():GetSongDir()
 
-local imgs = { "wow", "determined", "worried" }
+-- local faces = { "wow", "determined", "worried" }
+local faces = { 'normal' }
 
 local af = Def.ActorFrame{
 	InitCommand=function(self)
@@ -21,15 +22,17 @@ local af = Def.ActorFrame{
 	LoadActor("./box.png")..{ InitCommand=function(self) self:zoom(0.245) end }
 }
 
--- -- facial expressions
--- for i,img in ipairs(imgs) do
--- 	af[#af+1] = LoadActor("./Elli " .. img .. " (doubleres).png")..{
--- 		InitCommand=function(self)
--- 			self:zoom(0.235):halign(0):visible(false):xy(-296, -2)
--- 		end,
--- 		ShowCommand=function(self, params) self:visible(g.Dialog.Faces[g.Dialog.Index] == img) end
--- 	}
--- end
+-- facial expressions
+for i,face in ipairs(faces) do
+  af[#af+1] = LoadActor("./nellie " .. face .. " (doubleres).png")..{
+    InitCommand=function(self)
+      self:zoomto(80, 80):halign(0):visible(false):xy(-296, -2)
+    end,
+    ShowCommand=function(self, params) self:visible(g.Dialog.Faces[g.Dialog.Index] == face) end
+  }
+end
+
+local name_box_size = { w=100, h=32}
 
 -- the speaker's name and name box
 af[#af+1] = Def.ActorFrame{
@@ -43,14 +46,14 @@ af[#af+1] = Def.ActorFrame{
 	Def.Quad{
 		Name="Stroke",
 		InitCommand=function(self)
-			self:zoomto(104,36):diffuse(0.15,0.15,0.15,1)
+			self:zoomto(name_box_size.w+4, name_box_size.h+4):diffuse(3/255, 7/255, 18/255, 1)
 		end
 	},
 	-- name box
 	Def.Quad{
 		Name="Box",
 		InitCommand=function(self)
-			self:zoomto(100,32):diffuse(color("#995544"))
+			self:zoomto(name_box_size.w, name_box_size.h):diffuse(55/255, 65/255, 81/255, 1)
 		end,
 	},
 

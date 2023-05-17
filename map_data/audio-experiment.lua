@@ -8,7 +8,7 @@ return {
   height = 15,
   tilewidth = 32,
   tileheight = 32,
-  nextlayerid = 13,
+  nextlayerid = 14,
   nextobjectid = 21,
   properties = {},
   tilesets = {
@@ -193,6 +193,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
+            ["img"] = "normal",
             ["text"] = "The lows tones are now a distant memory, another time.  The high tones of this piano fill you with anticipation."
           }
         },
@@ -208,6 +209,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
+            ["img"] = "normal",
             ["text"] = "The lows tones are now a distant memory, another time.  The high tones of this piano fill you with anticipation."
           }
         },
@@ -223,6 +225,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
+            ["img"] = "normal",
             ["text"] = "The lows are more distant now,  and the middle tones are most prominent."
           }
         },
@@ -238,6 +241,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
+            ["img"] = "normal",
             ["text"] = "The lows are more distant now,  and the middle tones are most prominent."
           }
         },
@@ -253,6 +257,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
+            ["img"] = "normal",
             ["text"] = "The lower tones of this piano resonate clearly here.\nYour journey stretches out before you.   There is a long road ahead."
           }
         },
@@ -268,6 +273,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
+            ["img"] = "normal",
             ["text"] = "The lower tones of this piano resonate clearly here.\nYour journey stretches out before you.   There is a long road ahead."
           }
         }
