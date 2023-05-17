@@ -89,7 +89,7 @@ g.TouchHandler = function(next_tile)
       -- hardcode a transfer to blizzard as the end approaches
       -- if g.RunTime() > (177.5) then
       --   g.next_map = {
-      --     index = FindInTable("Blizzard", g.maps),
+      --     index = g.FindInTable("Blizzard", g.maps),
       --     x = 7,
       --     y = 5
       --   }

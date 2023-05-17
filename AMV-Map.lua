@@ -130,7 +130,7 @@ local GetLayerVerts = function(layer_lua, tileset_lua)
   -- -----------------------------------------------------------------------
   -- for debugging
   -- if layer_lua.name == "Ground" then
-  --    SM(row_str)
+  --   g.SM(row_str)
   -- end
   -- -----------------------------------------------------------------------
 
@@ -210,7 +210,7 @@ local PrintKeys = function(tbl)
   for k,v in pairs(tbl) do
     table.insert(t, k)
   end
-  SM(t)
+  g.SM(t)
 end
 
 -- PrintKeys(tileset_luas)
@@ -284,7 +284,7 @@ HandleLayer = function(layer)
 
           -- if the tileset needed to draw this gid has not already
           -- been accounted for in tilesets_needed, add it
-          if not FindInTable(tileset_lua.name, tilesets_needed) then
+          if not g.FindInTable(tileset_lua.name, tilesets_needed) then
             table.insert(tilesets_needed, tileset_lua.name)
           end
 

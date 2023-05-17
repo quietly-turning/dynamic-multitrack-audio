@@ -201,7 +201,7 @@ for k,character in pairs(characters) do
     ShowCommand=function(self, params)
       local speaker = g.Dialog.Speakers[g.Dialog.Index]
 
-      if FindInTable(speaker, characterKeys) then
+      if g.FindInTable(speaker, characterKeys) then
         self:visible(k == speaker)
       else
         self:visible(k == "defaults")
