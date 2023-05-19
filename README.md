@@ -16,7 +16,7 @@ and [ITGMania 0.6.1](https://github.com/itgmania/itgmania/releases/tag/v0.6.1).
 ## Support Tools
 
 I used [Tiled 1.8.4](https://www.mapeditor.org/download.html) to create this tilemap and export to Lua. 
-Newer versions of Tiled may work, but I haven't tested them.
+As of this writing, Tiled 1.10.1 is the latest version, and it seems to work fine.
 
 ## How to use
 
