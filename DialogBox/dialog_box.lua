@@ -96,7 +96,8 @@ local characterKeys = KeysToArray(characters)
 local af = Def.ActorFrame{
   InitCommand=function(self)
     self:visible(false):diffusealpha(0)
-      :xy(_screen.cx, _screen.h-64)
+      :xy(_screen.cx, _screen.h-(64*g.map.zoom))
+      :zoom(g.map.zoom)
     g.Dialog.ActorFrame = self
   end,
   ShowCommand=function(self)

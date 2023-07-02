@@ -122,7 +122,7 @@ local InteractionHandler = function()
     if npc then
 			-- Using the npc's name located at next_tile, we can refer to the actual npc actor
 			g.NPCs[g.CurrentMap][npc.name]:queuecommand("TurnToFacePlayer")
-      
+
 			if npc.properties and npc.properties.text then
 				InitDialog(npc)
 				if npc.properties.mission then
@@ -199,6 +199,7 @@ local Repeat = {
   DeviceButton_escape = function()
     _start.duration = GetTimeSinceStart() - _start.begin_time
     if _start.duration > 0.6 then
+      SCREENMAN:GetTopScreen():playcommand("Off")
       SCREENMAN:GetTopScreen():begin_backing_out()
     elseif _start.duration > 0.15 then
       SCREENMAN:SystemMessage("Continue holding &BACK; to exit.")

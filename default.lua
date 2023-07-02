@@ -15,8 +15,10 @@ g.SleepDuration = 0.15
 
 g.map = {
   af = nil,
-  zoom = 1.25
+  unscaled_zoom = 1.25
 }
+g.map.zoom = g.map.unscaled_zoom * (_screen.w/854)
+
 g.Dialog = {
   Speaker = "nellie"
 }
