@@ -1,5 +1,9 @@
 
-local files = { "gentle_wind1.ogg", "gentle_wind2.ogg", "strings.ogg" }
+local files = {
+  "gentle_wind1.ogg",
+  "gentle_wind2.ogg",
+  -- "strings.ogg",
+}
 local song_dir = GAMESTATE:GetCurrentSong():GetSongDir()
 local startTime = GetTimeSinceStart()
 local uptime
