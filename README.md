@@ -6,7 +6,7 @@ minigame use in StepMania.
 This video demonstrates how moving the character avatar closer to — and further
 away from — each piano changes how loudly its audio plays.
 
-https://github.com/quietly-turning/dynamic-layered-audio-demo/assets/1253483/757c1caa-bff5-4c8b-922f-ec56c3dae012
+https://github.com/quietly-turning/dynamic-multitrack-audio/assets/1253483/a9d1ffca-e42d-466f-aa1a-ac323f62ffee
 
 ## Supported versions of StepMania
 
