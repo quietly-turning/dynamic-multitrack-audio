@@ -11,11 +11,11 @@ g.CurrentMap = 1
 g.collision_layer = {}
 
 g.InputIsLocked = false
-g.SleepDuration = 0.2
+g.SleepDuration = 0.15
 
 g.map = {
   af = nil,
-  zoom = 2
+  zoom = 1.25
 }
 g.Dialog = {
   Speaker = "nellie"
